@@ -16,11 +16,14 @@ const scrapeUserPage = (error, res, done) => {
 		done();
 		return;
 	}
-	const { url, rank } = res.options;
+	const { name, url, rank } = res.options;
 	const $ = res.$
-	const text = $($('.dl-horizontal dd:last-child')[0]).text()
+	const twitter = $($('.dl-horizontal dd:nth-of-type(2)')[0]).text()
+	const at = $($('.dl-horizontal dd:last-child')[0]).text()
+	console.log(name);
+	console.log(at);
+	console.log(twitter);
 	console.log(url);
-	console.log(text);
 	console.log(rank);
 	done()
 };
@@ -44,15 +47,18 @@ const scrape = (error, res, done) => {
 		return;
 	}
 
+	const $ = res.$
 	const trs = _.filter(
 		res.$('table tbody tr'),
-		v => res.$(v).find('img').attr('src') === '/public/img/flag/JP.png',
+		v => $(v).find('img').attr('src') === '/public/img/flag/JP.png',
 	)
 	_.each(trs, (v) => {
-		const userLink = res.$(v).find('a').attr('href')
+		const tr = $(v)
+		const userLink = tr.find('a').attr('href')
 		const url = `${HOST}${userLink}`
-		const rank = 123
-		userPageCrawler.queue([{ url, rank}])
+		const rank = parseInt($(tr.find('td:nth-of-type(1)')).text())
+		const name = $(tr.find('.username')).text()
+		userPageCrawler.queue([{ url, rank, name }])
 	})
 	done();
 };
