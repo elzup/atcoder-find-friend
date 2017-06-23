@@ -20,11 +20,7 @@ const scrapeUserPage = (error, res, done) => {
 	const $ = res.$
 	const twitter = $($('.dl-horizontal dd:nth-of-type(2)')[0]).text()
 	const at = $($('.dl-horizontal dd:last-child')[0]).text()
-	console.log(name);
-	console.log(at);
-	console.log(twitter);
-	console.log(url);
-	console.log(rank);
+	console.log({name, at, twitter , url, rank});
 	done()
 };
 
@@ -69,7 +65,7 @@ const c = new Crawler({
 	rateLimit: 1000
 });
 
-const urls = _.map(_.range(1, 2), i => ({
+const urls = _.map(_.range(1, 73), i => ({
 	url: `${HOST}/ranking?p=${i}`
 }));
 
