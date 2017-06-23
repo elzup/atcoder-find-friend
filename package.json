@@ -1,0 +1,30 @@
+{
+  "name": "atcoder-find-friend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "crawler": "^1.0.5",
+    "got": "^7.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir out",
+    "start": "babel src --out-dir out && node out/index.js",
+    "debug": "babel src --out-dir out && node debug out/index.js"
+  },
+  "babel": {
+    "presets": [
+      "stage-0",
+      "es2015",
+      "flow"
+    ]
+  }
+}
